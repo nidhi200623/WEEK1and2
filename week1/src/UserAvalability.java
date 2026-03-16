@@ -1,49 +1,27 @@
 import java.util.*;
+
 public class UserAvalability {
-    HashMap<String, Integer> users = new HashMap<>();
-    HashMap<String, Integer> attempts = new HashMap<>();
 
-    public boolean checkAvailability(String username) {
+    public static void findTwoSum(int[] arr, int target) {
 
-        attempts.put(username, attempts.getOrDefault(username, 0) + 1);
+        HashMap<Integer, Integer> map = new HashMap<>();
 
-        return !users.containsKey(username);
-    }
+        for (int num : arr) {
 
-    public List<String> suggestAlternatives(String username) {
+            int complement = target - num;
 
-        List<String> suggestions = new ArrayList<>();
-
-        suggestions.add(username + "1");
-        suggestions.add(username + "2");
-        suggestions.add(username.replace("_", "."));
-
-        return suggestions;
-    }
-
-    public String getMostAttempted() {
-
-        String maxUser = "";
-        int max = 0;
-
-        for (String u : attempts.keySet()) {
-            if (attempts.get(u) > max) {
-                max = attempts.get(u);
-                maxUser = u;
+            if (map.containsKey(complement)) {
+                System.out.println(num + " + " + complement);
             }
-        }
 
-        return maxUser;
+            map.put(num, 1);
+        }
     }
 
     public static void main(String[] args) {
 
-        UserAvalability obj = new UserAvalability();
+        int[] arr = {500, 300, 200};
 
-        obj.users.put("john_doe", 1);
-
-        System.out.println(obj.checkAvailability("john_doe"));
-        System.out.println(obj.checkAvailability("jane_smith"));
-        System.out.println(obj.suggestAlternatives("john_doe"));
+        findTwoSum(arr, 500);
     }
 }
